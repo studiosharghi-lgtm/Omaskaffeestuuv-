@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="de" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Omas Apfelkuchen</title>
+    <meta
+      name="description"
+      content="Wie Omas Apfelkuchen entsteht: vom Apfelschneiden bis zum ersten Stück mit Cappuccino. Ein Blick in die Backstube von Oma’s Kaffeestuuv am Schönberger Strand."
+    />
+    <meta name="theme-color" content="#F6EFE4" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:title" content="Omas Apfelkuchen" />
+    <meta
+      property="og:description"
+      content="Vom Apfelschneiden bis zum ersten Stück: ein Blick in die Backstube von Oma’s Kaffeestuuv am Schönberger Strand."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M4 25 L27 9 Q29 17 26 25 Z' fill='%23C98A3D'/%3E%3Cpath d='M4 25 L27 9' stroke='%237A2E1C' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E"
+    />
+    <script>
+      document.documentElement.classList.replace('no-js', 'js');
+    </script>
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+  <body>
+    <a class="sprunglink" href="#besuch">Direkt zu Adresse und Öffnungszeiten</a>
+
+    <header class="kopf">
+      <a class="kopf__marke" href="https://omaskaffeestuuv.de/">Oma’s Kaffeestuuv</a>
+      <div class="kopf__aktionen">
+        <button class="kopf__knopf kopf__status" type="button" aria-controls="produktionsstatus" aria-expanded="false" hidden>
+          <span class="nur-breit">Vorschau mit </span>Platzhaltern
+        </button>
+        <button class="kopf__knopf kopf__bewegung" type="button" aria-pressed="false" hidden>Ruhige Ansicht</button>
+      </div>
+    </header>
+
+    <aside class="status" id="produktionsstatus" aria-labelledby="status-titel" hidden>
+      <h2 class="status__titel" id="status-titel">Produktionsstatus</h2>
+      <p class="status__text">
+        Diese Vorschau zeigt Platzhalter, wo noch echtes Material fehlt. Sobald die Dateien in
+        <code>public/media/</code> liegen, ersetzt der nächste Build sie automatisch.
+      </p>
+      <ul class="status__liste"></ul>
+      <p class="status__text">Genaue Vorgaben: <code>ASSETS.md</code> im Projektordner.</p>
+    </aside>
+
+    <main>
+      <section class="erlebnis" id="erlebnis" aria-labelledby="titel">
+        <div class="buehne">
+          <canvas class="buehne__leinwand" aria-hidden="true"></canvas>
+          <div class="buehne__schleier" aria-hidden="true"></div>
+
+          <div class="fenster" aria-hidden="true">
+            <div class="fenster__oeffnung">
+              <div class="fenster__fluegel fenster__fluegel--links">
+                <span class="fenster__scheibe"></span>
+                <span class="fenster__scheibe"></span>
+                <span class="fenster__scheibe"></span>
+              </div>
+              <div class="fenster__fluegel fenster__fluegel--rechts">
+                <span class="fenster__scheibe"></span>
+                <span class="fenster__scheibe"></span>
+                <span class="fenster__scheibe"></span>
+                <i class="fenster__griff"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="auftakt">
+            <h1 class="auftakt__titel" id="titel"><span>Omas</span> <span>Apfelkuchen</span></h1>
+            <p class="auftakt__text">Ein Blick in die Backstube von Oma’s Kaffeestuuv am Schönberger Strand.</p>
+            <p class="auftakt__hinweis">Scrollen Sie langsam. Guter Kuchen braucht Zeit.</p>
+          </div>
+
+          <ol class="kapitel">
+            <li class="kapitel__eintrag" data-kapitel="aepfel">
+              <h2 class="kapitel__titel">Zuerst die Äpfel.</h2>
+              <p class="kapitel__text">Frisch und knackig, in feine Spalten geschnitten.</p>
+            </li>
+            <li class="kapitel__eintrag" data-kapitel="teig">
+              <h2 class="kapitel__titel">Dann der Teig.</h2>
+              <p class="kapitel__text">Mehl, frische Butter und Eier. Keine Fertigmischung, nur das Gute.</p>
+            </li>
+            <li class="kapitel__eintrag" data-kapitel="fuellung">
+              <h2 class="kapitel__titel">Schicht um Schicht.</h2>
+              <p class="kapitel__text">Die Apfelspalten kommen dicht an dicht auf den Teig, dazu Zimt und Zucker.</p>
+            </li>
+            <li class="kapitel__eintrag" data-kapitel="ofen">
+              <h2 class="kapitel__titel">Ab in den Ofen.</h2>
+              <p class="kapitel__text">Bis er goldbraun ist und die ganze Stuuv nach Zimt duftet.</p>
+            </li>
+            <li class="kapitel__eintrag" data-kapitel="anrichten">
+              <h2 class="kapitel__titel">Frisch aus dem Ofen.</h2>
+              <p class="kapitel__text">Er dampft noch. Ein paar Minuten Geduld.</p>
+            </li>
+            <li class="kapitel__eintrag" data-kapitel="anschnitt">
+              <h2 class="kapitel__titel">Das erste Stück.</h2>
+              <p class="kapitel__text">Saftige Äpfel, zarter Teig, ein Hauch Zimt.</p>
+            </li>
+            <li class="kapitel__eintrag" data-kapitel="kaffee">
+              <h2 class="kapitel__titel">Dazu ein Cappuccino.</h2>
+              <p class="kapitel__text">Und ein Fensterplatz in der Stuuv.</p>
+            </li>
+          </ol>
+
+          <p class="schlusszeile">Wo die Zeit langsam wird.</p>
+
+          <p class="platzhalter" hidden></p>
+          <p class="buehne__laden" role="status" hidden>Der Kuchen wird angeschnitten …</p>
+          <nav class="kapitelnav" aria-label="Kapitel" hidden></nav>
+        </div>
+      </section>
+
+      <section class="besuch" id="besuch" aria-labelledby="besuch-titel">
+        <div class="besuch__inhalt">
+          <h2 class="besuch__titel" id="besuch-titel">Ein Stück für Sie.</h2>
+          <p class="besuch__text">
+            Omas Apfelkuchen nach Hausrezept, mit frischen Äpfeln und Zimt. Dazu Kaffee aus der Stuuv, drinnen am
+            Fenster oder draußen im Garten.
+          </p>
+          <div class="besuch__angaben">
+            <address class="besuch__adresse">
+              Oma’s Kaffeestuuv<br />
+              Promenade 15<br />
+              24217 Schönberg (Holstein)
+            </address>
+            <p class="besuch__zeiten">
+              Täglich geöffnet<br />
+              12:00–17:30 Uhr
+            </p>
+          </div>
+          <div class="besuch__links">
+            <a class="besuch__knopf" href="https://omaskaffeestuuv.de/#speisekarte/kuchen">Zur Kuchentheke</a>
+            <a class="besuch__link" href="https://omaskaffeestuuv.de/">Zur Startseite</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="fuss">
+      <p>
+        Impressum und Datenschutz finden Sie auf
+        <a href="https://omaskaffeestuuv.de/">omaskaffeestuuv.de</a>.
+      </p>
+    </footer>
+  </body>
+</html>

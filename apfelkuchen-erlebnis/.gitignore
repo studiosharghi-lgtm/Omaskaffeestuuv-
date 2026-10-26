@@ -1,0 +1,8 @@
+node_modules/
+dist/
+*.log
+.DS_Store
+
+# Placeholder reference photos supplied for art direction. Kept out of this public repo until their
+# usage rights are confirmed; without them the page shows storyboard cards instead (see ASSETS.md).
+public/media/reference/

@@ -1,0 +1,69 @@
+{
+  "$comment": "Expected production media. Paths are relative to public/media/. The build scans these folders (scripts/media-inventory.mjs); anything missing is replaced by a labelled placeholder at runtime and listed by `npm run media:check`. Full shot specs: ASSETS.md.",
+  "sequences": [
+    {
+      "id": "s01-aepfel",
+      "title": "Äpfel schneiden",
+      "chapter": "aepfel",
+      "recommended": { "frames": 96, "fps": 24 },
+      "variants": {
+        "desktop": { "width": 1920, "height": 1080 },
+        "mobile": { "width": 1080, "height": 1920 }
+      }
+    },
+    {
+      "id": "s02-teig",
+      "title": "Teig vorbereiten",
+      "chapter": "teig",
+      "recommended": { "frames": 96, "fps": 24 },
+      "variants": {
+        "desktop": { "width": 1920, "height": 1080 },
+        "mobile": { "width": 1080, "height": 1920 }
+      }
+    },
+    {
+      "id": "s03-fuellung",
+      "title": "Füllung einschichten",
+      "chapter": "fuellung",
+      "recommended": { "frames": 96, "fps": 24 },
+      "variants": {
+        "desktop": { "width": 1920, "height": 1080 },
+        "mobile": { "width": 1080, "height": 1920 }
+      }
+    },
+    {
+      "id": "s04-ofen",
+      "title": "Backen im Ofen (Zeitraffer)",
+      "chapter": "ofen",
+      "recommended": { "frames": 84, "fps": 24 },
+      "variants": {
+        "desktop": { "width": 1920, "height": 1080 },
+        "mobile": { "width": 1080, "height": 1920 }
+      }
+    },
+    {
+      "id": "s05-anrichten",
+      "title": "Aus dem Ofen auf den Tisch (Übergabe an 3D)",
+      "chapter": "anrichten",
+      "recommended": { "frames": 72, "fps": 24 },
+      "variants": {
+        "desktop": { "width": 1920, "height": 1080 },
+        "mobile": { "width": 1080, "height": 1920 }
+      }
+    }
+  ],
+  "models": [
+    { "id": "cake-body", "file": "models/cake-body.glb", "title": "Apfelkuchen ohne das erste Stück (Scan)", "group": "cake" },
+    { "id": "cake-slice", "file": "models/cake-slice.glb", "title": "Das erste Stück (Scan)", "group": "cake" },
+    { "id": "plate", "file": "models/plate.glb", "title": "Keramikteller (Scan)" },
+    { "id": "cup", "file": "models/cup.glb", "title": "Cappuccino-Tasse mit Untertasse (Scan)" }
+  ],
+  "posters": [
+    { "id": "finale", "file": "posters/finale.webp", "title": "Schlussbild als Foto (Fallback ohne WebGL, Vorschaubild beim Teilen)", "width": 1920, "height": 1080 }
+  ],
+  "reference": [
+    { "id": "pie-raw-topdown", "file": "reference/pie-raw-topdown.webp", "title": "Referenzfoto: Kuchen vor dem Backen, Draufsicht" },
+    { "id": "cake-baked-steam", "file": "reference/cake-baked-steam.webp", "title": "Referenzfoto: gebackener Kuchen mit Dampf" },
+    { "id": "slice-cappuccino", "file": "reference/slice-cappuccino.webp", "title": "Referenzfoto: Kuchenstück mit Cappuccino" }
+  ]
+}

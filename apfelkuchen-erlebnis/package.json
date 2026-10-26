@@ -1,0 +1,30 @@
+{
+  "name": "omas-apfelkuchen-erlebnis",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Scroll-gesteuertes Apfelkuchen-Erlebnis für Oma’s Kaffeestuuv: fotorealistische Bildsequenzen mit Übergang in eine 3D-Schlussszene.",
+  "type": "module",
+  "engines": {
+    "node": ">=18.18"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p tsconfig.app.json && tsc -p tsconfig.node.json && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -p tsconfig.app.json && tsc -p tsconfig.node.json",
+    "media:check": "node scripts/check-media.mjs",
+    "media:frames": "bash scripts/extract-frames.sh"
+  },
+  "dependencies": {
+    "@fontsource-variable/fraunces": "^5.3.0",
+    "@fontsource-variable/jost": "^5.3.0",
+    "gsap": "^3.15.0",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@types/three": "^0.186.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5"
+  }
+}
