@@ -5,15 +5,15 @@ scrolling down plays it, scrolling up rewinds it. Scrolling itself stays complet
 script never touches the mouse wheel, touch gestures or keys. Texts are real HTML on top of the
 video, so they stay sharp, readable for screen readers and search engines, and editable.
 
-`vorschau.html` is a working preview: open it through any web server (or directly from disk).
+`vorschau.html` is a working preview: open it through any web server or directly from disk.
 
 ## What the video shows
 
 The video is rendered from the scroll experience in this project (`npm run film:render`). The
 chapters up to "Frisch aus dem Ofen" use the three supplied reference photos with camera moves; the
 ending (slice, plate, cappuccino) is the procedural 3D stand-in. **There is no filmed baking footage
-in it yet.** Once the film sequences and scans from `../ASSETS.md` exist, re-render and replace
-the files in `omas-scrollfilm/media/`; the embed code stays the same.
+in it yet.** Once the film sequences and scans listed in the project's `ASSETS.md` exist,
+re-render and replace the files in `omas-scrollfilm/media/`; the embed code stays the same.
 
 ## Files
 
@@ -65,11 +65,11 @@ should allow CORS; otherwise the script streams them directly, which scrubs a li
 | Keyboard | "Film überspringen" link at the start of the section. |
 | iPhone in Low Power Mode | Videos may not be painted until the first touch; the script retries on the first touch automatically. |
 
-Sizes: desktop video ≈ see `media/`, phone video is smaller; only one of them is loaded per visit.
+Sizes: desktop video 10.1 MB, phone video 4.8 MB (a visitor loads only one of them), stills 50–250 KB.
 
 ## Re-rendering
 
-In the project folder (needs Playwright with Chromium and ffmpeg):
+In the project folder `apfelkuchen-erlebnis/` (needs Playwright with Chromium and ffmpeg):
 
 ```bash
 npm run build

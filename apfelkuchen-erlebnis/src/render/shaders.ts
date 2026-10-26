@@ -126,10 +126,14 @@ vec3 gradeClip(vec3 c, vec3 g) {
 
 vec3 footage(sampler2D tex, vec4 rect, vec3 g) {
   vec2 suv = rect.xy + vUv * rect.zw;
-  vec2 over = max(-suv, suv - 1.0);
-  float outside = max(over.x / rect.z, over.y / rect.w);
+  // distance beyond the frame's edge in screen units (negative inside the frame)
+  vec2 over = max(-suv, suv - 1.0) / rect.zw;
+  // Where a still does not fill the screen on an axis (landscape photo on a portrait screen),
+  // it dissolves into the matte just inside its edge, instead of smearing its edge pixels.
+  vec2 letterbox = smoothstep(1.0, 1.06, rect.zw);
+  vec2 fade = mix(smoothstep(0.0, 0.05, over), smoothstep(-0.08, 0.0, over), letterbox);
   vec3 c = gradeClip(texture2D(tex, clamp(suv, vec2(0.001), vec2(0.999))).rgb, g);
-  return mix(c, uMatte * g.x, smoothstep(0.0, 0.05, outside));
+  return mix(c, uMatte * g.x, max(fade.x, fade.y));
 }
 
 float hash12(vec2 p) {
