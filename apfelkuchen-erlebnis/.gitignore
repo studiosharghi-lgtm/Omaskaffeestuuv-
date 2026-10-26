@@ -6,3 +6,8 @@ dist/
 # Placeholder reference photos supplied for art direction. Kept out of this public repo until their
 # usage rights are confirmed; without them the page shows storyboard cards instead (see ASSETS.md).
 public/media/reference/
+
+# Scroll video export (npm run film:render): frames are large and rebuildable; the video and stills
+# are made from the reference photos above, so they stay out of the public repo as well.
+scrollfilm/render/
+scrollfilm/omas-scrollfilm/media/

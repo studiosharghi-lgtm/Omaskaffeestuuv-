@@ -61,6 +61,22 @@ export class FrameLoader {
     return n;
   }
 
+  /** Video export: resolves once exactly the frame nearest to `frame` has loaded (or failed). */
+  whenReady(frame: number): Promise<void> {
+    const target = Math.max(0, Math.min(this.count - 1, Math.round(frame)));
+    return new Promise((resolve) => {
+      const check = (): void => {
+        if (this.state[target] === State.Ready || this.state[target] === State.Failed) {
+          resolve();
+          return;
+        }
+        this.focus(target);
+        setTimeout(check, 16);
+      };
+      check();
+    });
+  }
+
   /** The loaded frame closest to `frame`, or null while nothing is ready. */
   nearest(frame: number): { image: HTMLImageElement; index: number } | null {
     const target = Math.max(0, Math.min(this.count - 1, Math.round(frame)));

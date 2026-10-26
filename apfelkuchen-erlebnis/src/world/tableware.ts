@@ -99,13 +99,20 @@ function latteTexture(maxAnisotropy: number): CanvasTexture {
   ctx.fillStyle = crema;
   ctx.fillRect(0, 0, size, size);
 
-  // fine bubbles in the crema
+  // fine bubbles in the crema (seeded, so every page load and every video frame shows the same cup)
+  let seed = 0x2f6e2b1;
+  const random = (): number => {
+    seed = (seed + 0x6d2b79f5) | 0;
+    let x = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x;
+    return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
+  };
   for (let i = 0; i < 2600; i++) {
-    const a = Math.random() * Math.PI * 2;
-    const r = Math.sqrt(Math.random()) * c * 0.98;
-    ctx.fillStyle = `rgba(${Math.random() < 0.5 ? '240,220,190' : '90,50,25'}, ${0.05 + Math.random() * 0.08})`;
+    const a = random() * Math.PI * 2;
+    const r = Math.sqrt(random()) * c * 0.98;
+    ctx.fillStyle = `rgba(${random() < 0.5 ? '240,220,190' : '90,50,25'}, ${0.05 + random() * 0.08})`;
     ctx.beginPath();
-    ctx.arc(c + Math.cos(a) * r, c + Math.sin(a) * r, 0.6 + Math.random() * 1.6, 0, Math.PI * 2);
+    ctx.arc(c + Math.cos(a) * r, c + Math.sin(a) * r, 0.6 + random() * 1.6, 0, Math.PI * 2);
     ctx.fill();
   }
 

@@ -910,3 +910,23 @@ code {
     translate: none;
   }
 }
+
+/* ------------------------------------------------------------------ video export (?capture) */
+
+/* Frames for the scroll video: the stage only, without page chrome. */
+.is-capture .sprunglink,
+.is-capture .kopf,
+.is-capture .status,
+.is-capture .platzhalter,
+.is-capture .buehne__laden,
+.is-capture .kapitelnav {
+  display: none !important;
+}
+
+/* `&text=0`: no texts and no text scrim; the website sets them as HTML over the video. */
+.ohne-text .auftakt,
+.ohne-text .kapitel,
+.ohne-text .schlusszeile,
+.ohne-text .buehne__schleier {
+  display: none !important;
+}

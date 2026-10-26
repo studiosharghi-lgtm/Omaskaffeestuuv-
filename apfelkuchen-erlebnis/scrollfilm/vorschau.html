@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Omas Apfelkuchen – Scrollfilm (Vorschau)</title>
+    <style>
+      /* Only for this preview page: stands in for the café website around the film. */
+      body {
+        margin: 0;
+        background: #f6efe4;
+        color: #2b1d14;
+        font: 400 1.0625rem/1.6 system-ui, sans-serif;
+      }
+      .vorschau-seite {
+        max-width: 44rem;
+        margin: 0 auto;
+        padding: 18vh 6vw;
+      }
+      .vorschau-seite h1 {
+        margin: 0 0 0.4em;
+        font: 600 clamp(1.8rem, 1.2rem + 2vw, 2.6rem) / 1.15 Georgia, serif;
+      }
+      .vorschau-seite p {
+        margin: 0 0 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="vorschau-seite">
+      <h1>Vorschau</h1>
+      <p>Hier steht der Inhalt Ihrer Seite oberhalb des Films. Scrollen Sie nach unten: Der Film läuft mit dem Scrollen vorwärts und beim Zurückscrollen rückwärts.</p>
+    </div>
+
+    <!-- ============ Omas Apfelkuchen – Scrollfilm: ab hier kopieren ============ -->
+    <link rel="stylesheet" href="omas-scrollfilm/omas-scrollfilm.css" />
+    <section
+      class="omas-film"
+      aria-labelledby="omas-film-titel"
+      data-film-desktop="omas-scrollfilm/media/apfelkuchen-scrollfilm-desktop.mp4"
+      data-film-mobil="omas-scrollfilm/media/apfelkuchen-scrollfilm-mobil.mp4"
+      data-bilder="600"
+      data-story="14.3"
+    >
+      <a class="omas-film__ueberspringen" href="#omas-film-ende">Film überspringen</a>
+      <div class="omas-film__buehne">
+        <picture class="omas-film__poster">
+          <source media="(max-aspect-ratio: 1/1)" srcset="omas-scrollfilm/media/apfelkuchen-mobil-01.jpg" />
+          <img
+            src="omas-scrollfilm/media/apfelkuchen-desktop-01.jpg"
+            alt="Ein blau gestrichenes Sprossenfenster in einer weiß gekalkten Wand; dahinter Äpfel und Zimtstangen auf dem Küchentisch."
+            width="1920"
+            height="1080"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+        <video class="omas-film__video" muted playsinline preload="none" disablepictureinpicture disableremoteplayback aria-hidden="true" tabindex="-1"></video>
+        <div class="omas-film__schleier" aria-hidden="true"></div>
+
+        <div class="omas-film__auftakt">
+          <h2 class="omas-film__titel" id="omas-film-titel"><span>Omas</span> <span>Apfelkuchen</span></h2>
+          <p class="omas-film__einleitung">Ein Blick in die Backstube von Oma’s Kaffeestuuv am Schönberger Strand.</p>
+          <p class="omas-film__hinweis">Scrollen Sie langsam. Guter Kuchen braucht Zeit.</p>
+        </div>
+
+        <!-- data-von / data-bis: when a caption appears and leaves (timeline of the film, 0 to 14.3) -->
+        <ol class="omas-film__kapitel">
+          <li data-von="1.05" data-bis="2.45">
+            <img class="omas-film__bild" src="omas-scrollfilm/media/apfelkuchen-desktop-02.jpg" data-mobil="omas-scrollfilm/media/apfelkuchen-mobil-02.jpg" alt="Äpfel mit Blättern und Zimtstangen auf einem dunklen Holztisch." width="1920" height="1080" loading="lazy" decoding="async" />
+            <h3>Zuerst die Äpfel.</h3>
+            <p>Frisch und knackig, in feine Spalten geschnitten.</p>
+          </li>
+          <li data-von="2.85" data-bis="4.25">
+            <img class="omas-film__bild" src="omas-scrollfilm/media/apfelkuchen-desktop-03.jpg" data-mobil="omas-scrollfilm/media/apfelkuchen-mobil-03.jpg" alt="Teig, Nudelholz und Zimtstangen auf einem Holztisch." width="1920" height="1080" loading="lazy" decoding="async" />
+            <h3>Dann der Teig.</h3>
+            <p>Mehl, frische Butter und Eier. Keine Fertigmischung, nur das Gute.</p>
+          </li>
+          <li data-von="4.65" data-bis="6.05">
+            <img class="omas-film__bild" src="omas-scrollfilm/media/apfelkuchen-desktop-04.jpg" data-mobil="omas-scrollfilm/media/apfelkuchen-mobil-04.jpg" alt="Apfelspalten mit Zimtzucker in der Teigform, von oben gesehen." width="1920" height="1080" loading="lazy" decoding="async" />
+            <h3>Schicht um Schicht.</h3>
+            <p>Die Apfelspalten kommen dicht an dicht auf den Teig, dazu Zimt und Zucker.</p>
+          </li>
+          <li data-von="6.45" data-bis="7.55">
+            <img class="omas-film__bild" src="omas-scrollfilm/media/apfelkuchen-desktop-05.jpg" data-mobil="omas-scrollfilm/media/apfelkuchen-mobil-05.jpg" alt="Gebackener Apfelkuchen mit gefächerten Apfelspalten im warmen Licht." width="1920" height="1080" loading="lazy" decoding="async" />
+            <h3>Ab in den Ofen.</h3>
+            <p>Bis er goldbraun ist und die ganze Stuuv nach Zimt duftet.</p>
+          </li>
+          <li data-von="7.95" data-bis="9.0">
+            <img class="omas-film__bild" src="omas-scrollfilm/media/apfelkuchen-desktop-06.jpg" data-mobil="omas-scrollfilm/media/apfelkuchen-mobil-06.jpg" alt="Frisch gebackener Apfelkuchen, von dem Dampf aufsteigt." width="1920" height="1080" loading="lazy" decoding="async" />
+            <h3>Frisch aus dem Ofen.</h3>
+            <p>Er dampft noch. Ein paar Minuten Geduld.</p>
+          </li>
+          <li data-von="9.65" data-bis="11.1">
+            <img class="omas-film__bild" src="omas-scrollfilm/media/apfelkuchen-desktop-07.jpg" data-mobil="omas-scrollfilm/media/apfelkuchen-mobil-07.jpg" alt="Das erste Stück Apfelkuchen liegt auf einem Steingutteller, daneben eine Gabel." width="1920" height="1080" loading="lazy" decoding="async" />
+            <h3>Das erste Stück.</h3>
+            <p>Saftige Äpfel, zarter Teig, ein Hauch Zimt.</p>
+          </li>
+          <li data-von="11.7" data-bis="12.95">
+            <img class="omas-film__bild" src="omas-scrollfilm/media/apfelkuchen-desktop-08.jpg" data-mobil="omas-scrollfilm/media/apfelkuchen-mobil-08.jpg" alt="Ein dampfender Cappuccino mit Milchschaum-Blatt hinter dem Kuchenstück." width="1920" height="1080" loading="lazy" decoding="async" />
+            <h3>Dazu ein Cappuccino.</h3>
+            <p>Und ein Fensterplatz in der Stuuv.</p>
+          </li>
+        </ol>
+
+        <div class="omas-film__schluss" data-von="13.85" data-bis="14.2" data-bild-ab="13.15">
+          <img class="omas-film__bild" src="omas-scrollfilm/media/apfelkuchen-desktop-09.jpg" data-mobil="omas-scrollfilm/media/apfelkuchen-mobil-09.jpg" alt="Durch das Sprossenfenster gesehen: Kuchenstück und Cappuccino auf dem Tisch." width="1920" height="1080" loading="lazy" decoding="async" />
+          <p class="omas-film__schlusszeile">Wo die Zeit langsam wird.</p>
+        </div>
+      </div>
+    </section>
+    <div id="omas-film-ende"></div>
+    <script src="omas-scrollfilm/omas-scrollfilm.js" defer></script>
+    <!-- ============ Omas Apfelkuchen – Scrollfilm: bis hier kopieren ============ -->
+
+    <div class="vorschau-seite">
+      <p>Hier geht Ihre Seite nach dem Film weiter.</p>
+    </div>
+  </body>
+</html>

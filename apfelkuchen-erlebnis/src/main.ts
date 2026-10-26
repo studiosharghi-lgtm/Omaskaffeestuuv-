@@ -33,7 +33,9 @@ async function startStaticStory(reason: StaticReason): Promise<void> {
 async function boot(): Promise<void> {
   const webgl = supportsWebGL2();
   const pref = readViewPref();
-  const calm = pref === 'ruhig' || (pref === null && reducedMotionQuery.matches);
+  // the video export (?capture) always records the animated version
+  const capture = new URLSearchParams(window.location.search).has('capture');
+  const calm = !capture && (pref === 'ruhig' || (pref === null && reducedMotionQuery.matches));
 
   setupStatusPanel();
   setupMotionToggle(calm || !webgl, webgl, switchView);

@@ -98,6 +98,12 @@ class Clip {
     }
   }
 
+  /** Video export: waits until the exact frame for `t` is decoded. */
+  async settle(t: number, variant: Variant): Promise<void> {
+    const src = this.source(variant);
+    if (src) await this.loader(src).whenReady(progress(t, this.spec.play) * (src.frames - 1));
+  }
+
   kind(variant: Variant): ClipKind {
     if (this.source(variant)) return 'sequence';
     return hasReference(this.spec.placeholder.reference) ? 'reference' : 'card';
@@ -309,14 +315,31 @@ export class FootageLayer {
     }
   }
 
+  private visibleClips(t: number): Clip[] {
+    const visible = this.clips.filter((c) => t >= c.spec.visible[0] && t <= c.spec.visible[1]);
+    if (visible.length) return visible;
+    return [t < this.clips[0].spec.visible[0] ? this.clips[0] : this.clips[this.clips.length - 1]];
+  }
+
+  /**
+   * Video export: resolves once everything shown at `t` is decoded, so a frame never
+   * captures a coarse stand-in frame or a still that is still loading.
+   */
+  async settle(t: number): Promise<void> {
+    const variant = this.variant;
+    await Promise.all(
+      this.clips
+        .filter((clip) => hasReference(clip.spec.placeholder.reference))
+        .map((clip) => this.reference(clip.spec.placeholder.reference).promise),
+    );
+    await Promise.all(this.visibleClips(t).map((clip) => clip.settle(t, variant)));
+  }
+
   state(t: number): FootageState {
     const variant = this.variant;
     for (const clip of this.clips) clip.manage(t, variant);
 
-    let visible = this.clips.filter((c) => t >= c.spec.visible[0] && t <= c.spec.visible[1]);
-    if (visible.length === 0) {
-      visible = [t < this.clips[0].spec.visible[0] ? this.clips[0] : this.clips[this.clips.length - 1]];
-    }
+    const visible = this.visibleClips(t);
     const top = visible[visible.length - 1];
     const below = visible.length > 1 ? visible[visible.length - 2] : null;
 

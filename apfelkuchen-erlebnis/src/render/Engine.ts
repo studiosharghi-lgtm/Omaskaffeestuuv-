@@ -33,6 +33,11 @@ export interface EngineOptions {
   quality: Quality;
   motion: boolean;
   onContextLost: () => void;
+  /**
+   * Video export: no animation loop and no automatic quality reduction; every frame is drawn
+   * explicitly with `renderAt`, on a clock chosen by the caller.
+   */
+  manual?: boolean;
 }
 
 /**
@@ -48,6 +53,7 @@ export class Engine {
   private world: World | null = null;
   private readonly canvas: HTMLCanvasElement;
   private readonly motion: boolean;
+  private readonly manual: boolean;
   private readonly ortho = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
   private readonly compositeScene = new Scene();
   private readonly dofScene = new Scene();
@@ -80,6 +86,7 @@ export class Engine {
     this.canvas = opts.canvas;
     this.quality = opts.quality;
     this.motion = opts.motion;
+    this.manual = opts.manual ?? false;
 
     this.renderer = new WebGLRenderer({
       canvas: this.canvas,
@@ -217,11 +224,23 @@ export class Engine {
     this.render(performance.now());
   }
 
+  /** Video export: renders the current timeline position with the clock at `nowMs`. */
+  renderAt(nowMs: number): void {
+    this.dirty = false;
+    this.render(nowMs);
+  }
+
+  /** Strength of the film grain (0 turns it off, e.g. for video files, where grain costs bitrate). */
+  setGrain(amount: number): void {
+    this.composite.uniforms.uGrain.value = amount;
+  }
+
   private onVisibility = (): void => {
     if (!document.hidden) this.requestRender();
   };
 
   private ensureLoop(): void {
+    if (this.manual) return;
     if (!this.raf && this.visible && !document.hidden && !this.disposed) {
       this.raf = requestAnimationFrame(this.tick);
     }

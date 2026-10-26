@@ -31,6 +31,34 @@ const $ = <T extends Element>(root: ParentNode, sel: string): T => {
   return el;
 };
 
+const nextFrame = () => new Promise<void>((r) => requestAnimationFrame(() => r()));
+
+/**
+ * `?capture` turns the page into a frame source for the scroll video
+ * (scripts/render-scrollfilm.mjs): no scrolling, no page chrome, and every frame is drawn on
+ * request at an exact timeline position and clock. `&text=0` leaves out all texts so the
+ * website can set them as real, editable HTML on top of the video; `&grain=` sets film grain
+ * (default 0, because grain costs a lot of bitrate in a video file).
+ */
+interface CaptureOptions {
+  text: boolean;
+  grain: number;
+}
+
+function readCaptureOptions(): CaptureOptions | null {
+  const params = new URLSearchParams(window.location.search);
+  if (!params.has('capture')) return null;
+  const grain = Number.parseFloat(params.get('grain') ?? '0');
+  return { text: params.get('text') !== '0', grain: Number.isFinite(grain) ? grain : 0 };
+}
+
+export interface FilmCapture {
+  /** Timeline length in screens. */
+  total: number;
+  /** Draws timeline position `t` with the animation clock (steam, camera breathing) at `clock` seconds. */
+  frame(t: number, clock: number): Promise<{ sceneMix: number }>;
+}
+
 export async function startCinematic({ onFatal }: Options): Promise<void> {
   const root = document.documentElement;
   const section = $<HTMLElement>(document, '#erlebnis');
@@ -44,6 +72,12 @@ export async function startCinematic({ onFatal }: Options): Promise<void> {
   const lengthScale = window.matchMedia('(pointer: coarse)').matches ? 0.85 : 1;
   section.style.setProperty('--laenge', String(+(TOTAL * lengthScale).toFixed(3)));
 
+  const capture = readCaptureOptions();
+  if (capture) {
+    root.classList.add('is-capture');
+    root.classList.toggle('ohne-text', !capture.text);
+  }
+
   let disposed = false;
   const splits: SplitText[] = [];
   let trigger: ScrollTrigger | null = null;
@@ -53,11 +87,13 @@ export async function startCinematic({ onFatal }: Options): Promise<void> {
     canvas,
     quality: pickQuality(),
     motion: true,
+    manual: capture !== null,
     onContextLost: () => {
       teardown();
       onFatal();
     },
   });
+  if (capture) engine.setGrain(capture.grain);
 
   function teardown(): void {
     if (disposed) return;
@@ -117,15 +153,17 @@ export async function startCinematic({ onFatal }: Options): Promise<void> {
 
   /* ---------------------------------------------------------------- scroll binding */
 
-  trigger = ScrollTrigger.create({
-    trigger: section,
-    start: 'top top',
-    end: () => `+=${Math.max(1, section.offsetHeight - stage.offsetHeight)}`,
-    // Native scrolling stays untouched; the timeline follows with a short, smooth catch-up.
-    scrub: 0.6,
-    animation: timeline,
-    invalidateOnRefresh: true,
-  });
+  if (!capture) {
+    trigger = ScrollTrigger.create({
+      trigger: section,
+      start: 'top top',
+      end: () => `+=${Math.max(1, section.offsetHeight - stage.offsetHeight)}`,
+      // Native scrolling stays untouched; the timeline follows with a short, smooth catch-up.
+      scrub: 0.6,
+      animation: timeline,
+      invalidateOnRefresh: true,
+    });
+  }
 
   let lastNavIndex = -1;
   const onTime = (t: number): void => {
@@ -164,7 +202,7 @@ export async function startCinematic({ onFatal }: Options): Promise<void> {
   }
 
   timeline.eventCallback('onUpdate', () => onTime(timeline.time()));
-  ScrollTrigger.refresh();
+  if (!capture) ScrollTrigger.refresh();
   onTime(timeline.time());
   engine.requestRender();
 
@@ -211,7 +249,7 @@ export async function startCinematic({ onFatal }: Options): Promise<void> {
             return;
           }
           engine.setWorld(world);
-          bindOrbit(world);
+          if (!capture) bindOrbit(world);
           updateChrome(engine.time);
         })
         .catch((error) => {
@@ -221,6 +259,29 @@ export async function startCinematic({ onFatal }: Options): Promise<void> {
     }
     return worldPromise;
   }
+
+  if (capture) {
+    await prepareWorld();
+    engine.resize();
+    const api: FilmCapture = {
+      total: TOTAL,
+      async frame(t, clock) {
+        const time = Math.min(TOTAL, Math.max(0, t));
+        timeline.time(time);
+        onTime(time);
+        await engine.footage.settle(time);
+        engine.renderAt(clock * 1000);
+        // let the compositor present both the canvas and the DOM layers before the screenshot
+        await nextFrame();
+        await nextFrame();
+        return { sceneMix: engine.worldFrame?.sceneMix ?? 0 };
+      },
+    };
+    (window as Window & { __omasFilm?: FilmCapture }).__omasFilm = api;
+    root.dataset.capture = engine.hasWorld() ? 'bereit' : 'ohne-3d';
+    return;
+  }
+
   const ric = (window as Window & { requestIdleCallback?: Window['requestIdleCallback'] }).requestIdleCallback;
   if (ric) ric(() => void prepareWorld(), { timeout: 6000 });
   else setTimeout(() => void prepareWorld(), 2500);

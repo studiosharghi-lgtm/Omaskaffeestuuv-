@@ -92,6 +92,21 @@ src/static/staticStory.ts  the calm version: stills + captions in reading order
 No third-party requests: fonts (Fraunces, Jost) are bundled from `@fontsource-variable`, no CDN,
 no analytics. This matches the main site, which also self-hosts its fonts.
 
+## Scroll video for other websites (Scrollfilm)
+
+The same story can be exported as a video that another page scrubs with its scroll position, for
+sites that cannot host the full app:
+
+```bash
+npm run build
+npm run film:render -- --variant desktop   # 16:9, 600 frames
+npm run film:render -- --variant mobil     # 9:16, 600 frames
+```
+
+`?capture` puts the page into a frame-by-frame render mode (no page chrome, exact timeline
+position, fixed animation clock, `&text=0` leaves out all texts). The embed code (HTML/CSS/JS,
+captions as real text, calm fallback) and how to use it are in `scrollfilm/README.md`.
+
 ## Deploying next to the main site
 
 `dist/` is self-contained with relative paths, so it can live in any sub-folder, e.g.

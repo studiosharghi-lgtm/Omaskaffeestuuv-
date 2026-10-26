@@ -13,7 +13,8 @@
     "preview": "vite preview",
     "typecheck": "tsc -p tsconfig.app.json && tsc -p tsconfig.node.json",
     "media:check": "node scripts/check-media.mjs",
-    "media:frames": "bash scripts/extract-frames.sh"
+    "media:frames": "bash scripts/extract-frames.sh",
+    "film:render": "node scripts/render-scrollfilm.mjs"
   },
   "dependencies": {
     "@fontsource-variable/fraunces": "^5.3.0",
