@@ -98,7 +98,7 @@ const VARIANTS = {
  * Story positions of the nine stills: opening, one per caption, closing.
  * They must match the order of the images in the embed markup (scrollfilm/vorschau.html).
  */
-const STILLS = [0, 1.75, 3.55, 5.35, 7.0, 8.45, 10.9, 12.5, 14.3];
+const STILLS = [0, 1.75, 3.55, 5.35, 7.0, 8.45, 11.45, 12.5, 14.3];
 const STORY = 14.3;
 
 const pad = (n) => String(n).padStart(5, '0');
